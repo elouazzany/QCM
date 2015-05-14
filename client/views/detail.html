@@ -1,0 +1,137 @@
+<div class="wrapper row-offcanvas row-offcanvas-left">
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="left-side sidebar-offcanvas"></aside>
+	<!-- Right side column. Contains the navbar and content of the page -->
+	<aside class="right-side">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				Création de Questionaire
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#/"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li class="active">Edition de Questionaire</li>
+			</ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-6">
+					<!-- general form elements disabled -->
+					<div class="box box-warning">
+						<div class="box-body">
+							<form role="form">
+								<!-- text input -->
+								<div class="form-group">
+									<label>Titre du QCM</label>
+									<input type="text" class="form-control" placeholder="Enter ..." ng-model="qcm.title">
+								</div>
+								<div class="form-group">
+									<button class="btn btn-primary btn-lg" ng-click="newQ = {choices: []}">
+										Ajouter une question
+										<i class="fa fa-plus"></i>
+									</button>
+									<button class="btn btn-warning btn-lg pull-right" ng-click="save(qcm)">
+										Terminer
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+								<div class="newqsform" ng-if="newQ">
+									<!-- Question title -->
+									<div class="form-group">
+										<label>Titre de la question</label>
+										<input type="text" class="form-control" placeholder="Enter ..." ng-model="newQ.title">
+									</div>
+									<div class="form-group">
+										<label>Type de la question</label>
+										<select class="form-control" ng-model="newQ.type">
+											<option value="unique">Question à choix multiples</option>
+											<option value="tf">Question vrai ou  faux</option>
+										</select>
+									</div>
+									<div class="form-group" ng-if="newQ.type == 'tf'">
+										<label>Selectionez la bonne réponse:</label>
+										<br>
+										<button class="btn btn-success"
+												ng-click="newQ.response = true"
+												ng-class="{'inactive': !parseResponse(newQ)}">
+											Vrai
+										</button>
+										<button class="btn btn-danger"
+												ng-click="newQ.response = false"
+												ng-class="{'inactive': parseResponse(newQ)}">
+											Faux
+										</button>
+									</div>
+									<div class="form-group" ng-if="newQ.type == 'unique'">
+										<label>
+											Ajouter une réponse:
+											<i class="fa fa-plus-circle fa-2x" ng-click="newQ.choices.push({title: 'Choix ' + (newQ.choices.length + 1)})"></i>
+										</label>
+										<div class="row">
+											<div ng-repeat="c in newQ.choices">
+												<div class="col-md-1 col-sm-2 col-xs-2">
+													<input ng-click="setResponse(newQ, $index)" type="radio" name="choice">
+												</div>
+												<div class="col-md-11 col-sm-10 col-xs-10">
+													<input type="text" ng-model="c.title" class="form-control marginls" value="Choix {{$index + 1}}">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn-lg" ng-click="addQuestion(newQ)">
+											Sauvegarder
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				<div class="col-md-6" ng-if="qcm.title">
+					<div class="box box-warning">
+						<div class="box-body">
+							<form role="form">
+								<h1>{{qcm.title}}</h1>
+								<div ng-repeat="q in qcm.questions">
+									<h4>
+										{{$index + 1}} - {{q.title}}
+										<i class="fa fa-trash pull-right" ng-click="qcm.questions.splice($index, 1)"></i>
+									</h4>
+									<div ng-if="q.type == 'tf'">
+										<button class="btn btn-success"
+												ng-click="q.response = true"
+												ng-class="{'inactive': !parseResponse(q)}">
+											Vrai
+										</button>
+										<button class="btn btn-danger"
+												ng-click="q.response = false"
+												ng-class="{'inactive': parseResponse(q)}">
+											Faux
+										</button>
+									</div>
+									<div ng-if="q.type == 'unique'">
+										<div ng-repeat="c in q.choices">
+											<label>
+												<input ng-click="setResponse(q, $index)" type="radio" name="{{$parent.$parent.$index}}" value="{{$index}}" ng-model="q.response">
+												{{c.title}}
+											</label>
+										</div>
+									</div>
+									<hr>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /.content -->
+	</aside>
+	<!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

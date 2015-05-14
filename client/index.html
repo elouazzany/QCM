@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title></title>
+    <title>QCM APP</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -18,18 +18,32 @@
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
-    <link rel="stylesheet" href="app/app.css">
+    <link rel="stylesheet" href="css/AdminLTE.css">
       <!-- injector:css -->
-      <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="css/custom.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="qcmApp">
+  <body class="skin-blue" ng-app="qcmApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    <header class="header">
+        <a href="/" class="logo">
+            <!-- Add the class icon to your logo image or logo icon to add the margining -->
+            QcmApp
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#/" class="navbar-btn sidebar-toggle" data-toggle="" role="">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+        </nav>
+    </header>
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
 
@@ -53,16 +67,18 @@
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-route/angular-route.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
-        <script src="app/app.js"></script>
+        <script src="js/app.js"></script>
           <!-- injector:js -->
-          <script src="app/main/main.controller.js"></script>
-          <script src="app/main/main.js"></script>
-          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="js/controllers/add.js"></script>
+          <script src="js/controllers/take.js"></script>
+          <script src="js/controllers/list.js"></script>
+          <script src="js/controllers/edit.js"></script>
+          <script src="js/services/qcm.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

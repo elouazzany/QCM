@@ -1,0 +1,12 @@
+.infield {
+	width: 80% !important;
+}
+.marginls{
+	margin-bottom: 10px;
+}
+.mleft {
+	margin-left: 15px;
+}
+.inactive{
+	opacity: 0.5;
+}
